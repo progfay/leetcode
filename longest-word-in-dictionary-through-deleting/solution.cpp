@@ -1,6 +1,7 @@
 #include <string>
 #include <vector>
 #include <algorithm>
+#include <iostream>
 
 using namespace std;
 
@@ -9,26 +10,20 @@ class Solution
 public:
   string findLongestWord(string s, vector<string> &d)
   {
-    sort(d.begin(), d.end(), [](const string &s1, const string &s2) { return s1.length() > s2.length(); });
-    string ans = "";
+    ios_base::sync_with_stdio(0), cin.tie(0);
+    sort(d.begin(), d.end(), [](const string &s1, const string &s2) { return s1.length() != s2.length() ? s1.length() > s2.length() : s1 < s2; });
 
     for (string w : d)
     {
-      if (ans != "" && w.length() < ans.length())
-        return ans;
-
-      if (!match(s, w))
-        continue;
-
-      if (ans == "" || ans > w)
-        ans = w;
+      if (match(s, w))
+        return w;
     }
 
-    return ans;
+    return "";
   }
 
 private:
-  bool match(string s, string w)
+  inline bool match(string &s, string &w)
   {
     int cursor = 0;
     int length = w.length();
