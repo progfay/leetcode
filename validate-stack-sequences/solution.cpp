@@ -14,12 +14,12 @@ public:
     for (int v : pushed)
     {
       s.push(v);
-      while (cursor < popped.size() && !s.empty() && s.top() == popped[cursor])
+      while (!s.empty() && s.top() == popped[cursor])
       {
         cursor++;
         s.pop();
       }
     }
-    return s.size() == 0;
+    return s.empty();
   }
 };
