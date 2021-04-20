@@ -1,4 +1,5 @@
 #include <vector>
+#include <stack>
 
 using namespace std;
 
@@ -25,25 +26,25 @@ public:
 
 class Solution
 {
-private:
-  vector<int> ans;
-
 public:
   vector<int> preorder(Node *root)
   {
-    ans = vector<int>();
-    visit(root);
+    vector<int> ans(0, 0);
+    if (!root)
+      return ans;
+
+    stack<Node *> s;
+    s.push(root);
+
+    while (!s.empty())
+    {
+      auto node = s.top();
+      s.pop();
+      ans.push_back(node->val);
+      for (auto it = node->children.rbegin(); it != node->children.rend(); it++)
+        s.push(*it);
+    }
+
     return ans;
-  }
-
-private:
-  void visit(Node *node)
-  {
-    if (!node)
-      return;
-
-    ans.push_back(node->val);
-    for (auto child : node->children)
-      visit(child);
   }
 };
