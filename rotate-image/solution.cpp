@@ -2,31 +2,19 @@
 
 using namespace std;
 
-class Solution {
+class Solution
+{
 public:
   void rotate(vector<vector<int>> &matrix)
   {
-    int len = matrix.size();
-    int head = 0, tail = len - 1;
-    int y = 0;
-    int tmp1, tmp2;
+    int i, j;
+    const int n = matrix.size();
+    for (i = 0; i < n; ++i)
+      for (j = 0; j < n / 2; ++j)
+        swap(matrix[j][i], matrix[n - j - 1][i]);
 
-    while (tail - head > 0)
-    {
-      for (int x = head; x < tail; x++)
-      {
-        tmp1 = matrix[y][len - x - 1];
-        matrix[y][len - x - 1] = matrix[x][y];
-        tmp2 = matrix[len - x - 1][len - y - 1];
-        matrix[len - x - 1][len - y - 1] = tmp1;
-        tmp1 = matrix[len - y - 1][x];
-        matrix[len - y - 1][x] = tmp2;
-        matrix[x][y] = tmp1;
-      }
-
-      head++;
-      tail--;
-      y++;
-    }
+    for (i = 0; i < n; ++i)
+      for (j = i + 1; j < n; ++j)
+        swap(matrix[j][i], matrix[i][j]);
   }
 };
