@@ -50,7 +50,7 @@ public:
     if (!head)
       return nullptr;
 
-    vector<int> nodes(0);
+    vector<int> nodes;
     auto listNode = head;
     while (listNode)
     {
@@ -62,7 +62,7 @@ public:
   }
 
 private:
-  TreeNode *createTree(vector<int> nodes, int left, int right)
+  TreeNode *createTree(vector<int> &nodes, int left, int right)
   {
     if (left == right)
       return new TreeNode(nodes[left]);
